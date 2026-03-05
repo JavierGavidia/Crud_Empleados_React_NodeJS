@@ -1,0 +1,7 @@
+@use '../base' as *;  // importa variables y mixins
+
+header {
+  background-color: $primary-color;
+  color: $white;
+  padding: 1rem;
+}

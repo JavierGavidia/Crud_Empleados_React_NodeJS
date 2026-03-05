@@ -1,0 +1,12 @@
+// Base
+@use 'base'; // Arquitectura SCSS modular. Con esto ya estamos recogiendo la variables, mixins, typography y reset gracias al _index.scss con los @fordward
+
+// Layout
+@use 'layout/header';
+@use 'layout/footer';
+
+// Componentes
+@use 'components/buttons';
+
+// Páginas
+@use 'pages/pagInicio';

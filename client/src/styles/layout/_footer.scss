@@ -1,0 +1,7 @@
+@use '../base' as *;  // importa variables y mixins
+
+footer {
+  background-color: $secondary-color;
+  color: $white;
+  padding: 1rem;
+}

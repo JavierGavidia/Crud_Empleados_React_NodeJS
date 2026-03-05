@@ -1,0 +1,13 @@
+@use '../base' as *;
+
+.pagina{
+    width: 100%;
+    height: auto;
+    min-height: 100dvh;
+    padding: max(5%, 20px) max(10%, 20px);
+    text-align: center;
+}
+
+.pag-inicio {
+    background-color: $bg-color;
+}

@@ -1,0 +1,22 @@
+@use "sass:color";
+@use 'variables' as *;
+
+@mixin transition($prop, $time) {
+  transition: $prop $time ease-in-out;
+}
+
+@mixin button-style($bg-color: $primary-color, $color: $white){
+    background-color: $bg-color;
+    color: $color;
+    border: none;
+    padding: .5rem 1rem;
+    margin: .5rem;
+    border-radius: .25rem;
+    box-shadow: 0 0 8px rgba(black, 0);
+    cursor: pointer;
+    @include transition(all, .3s);
+    &:hover{
+        background-color: color.scale($bg-color, $lightness: -20%);
+        box-shadow: 0 0 6px rgba(black, .5);
+    }
+}

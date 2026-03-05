@@ -1,0 +1,6 @@
+// Cuando algún archico.scss cargue base con (@use '../base' as *;), también tendrá acceso a variables y mixins.
+@forward 'variables';
+@forward 'mixins';
+@forward 'typography';
+@forward 'fonts';
+@forward 'reset';

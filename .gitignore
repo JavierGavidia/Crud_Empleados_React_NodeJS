@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Node.js
+node_modules/
+npm-debug.log
+
+# React / Vite
+client/dist/
+client/node_modules/
+
+# Backend
+server/node_modules/
+server/.env

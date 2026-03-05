@@ -1,0 +1,10 @@
+@use '../base' as *;
+
+.btn-primary {
+    @include button-style($primary-color);
+}
+
+.btn-secondary {
+    @include button-style($secondary-color);
+}
+

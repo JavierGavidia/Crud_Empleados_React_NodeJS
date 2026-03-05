@@ -1,0 +1,115 @@
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #2f6f73;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+}
+
+button {
+  font-family: "Monserrat", sans-serif;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../../assets/fonts/Roboto-Regular.ttf") format("ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("../../assets/fonts/Roboto-Italic.ttf") format("ttf");
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("../../assets/fonts/Roboto-Bold.ttf") format("ttf");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Monserrat";
+  src: url("../../assets/fonts/Montserrat-Regular.ttf") format("ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Monserrat";
+  src: url("../../assets/fonts/Montserrat-Italic.ttf") format("ttf");
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Monserrat";
+  src: url("../../assets/fonts/Montserrat-Bold.ttf") format("ttf");
+  font-weight: 700;
+  font-style: normal;
+}
+/* _reset.scss */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  background-color: #2f6f73;
+  color: #ffffff;
+  padding: 1rem;
+}
+
+footer {
+  background-color: #933608;
+  color: #ffffff;
+  padding: 1rem;
+}
+
+.btn-primary {
+  background-color: #2f6f73;
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.btn-primary:hover {
+  background-color: rgb(37.6, 88.8, 92);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.btn-secondary {
+  background-color: #933608;
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.btn-secondary:hover {
+  background-color: rgb(117.6, 43.2, 6.4);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.pagina {
+  width: 100%;
+  height: auto;
+  min-height: 100dvh;
+  padding: max(5%, 20px) max(10%, 20px);
+  text-align: center;
+}
+
+.pag-inicio {
+  background-color: #d0d0d0;
+}/*# sourceMappingURL=main.css.map */
