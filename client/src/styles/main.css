@@ -112,4 +112,14 @@ footer {
 
 .pag-inicio {
   background-color: #d0d0d0;
+}
+
+.cont-input {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  gap: 10px;
+}
+.cont-input input {
+  padding: 2px 5px;
 }/*# sourceMappingURL=main.css.map */

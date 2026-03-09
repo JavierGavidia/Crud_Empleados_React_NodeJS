@@ -11,3 +11,13 @@
 .pag-inicio {
     background-color: $bg-color;
 }
+
+.cont-input{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    gap: 10px;
+    input{
+        padding: 2px 5px;
+    }
+}
