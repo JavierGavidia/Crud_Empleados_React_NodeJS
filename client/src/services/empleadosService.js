@@ -26,9 +26,15 @@ export const crearEmpleado = async (empleado) => {
 // Obtener empleado por id
 export const getEmpleadoById = async (id) => {
     const response = await fetch(`${API_URL}/${id}`);
+
+    if (!response.ok) {
+        throw new Error("Error al obtener empleado");
+    }
+
     return response.json();
 }
 
+// Actualizar empleado por id
 export const actualizarEmpleado  = async (id, empleado) => {
     const response = await fetch(`${API_URL}/${id}`, {
         method: "PUT",
@@ -40,3 +46,12 @@ export const actualizarEmpleado  = async (id, empleado) => {
 
     return response.json();
 };
+
+// Eliminar empleado por id
+export const eliminarEmpleado = async (id) => {
+    const response = await fetch(`${API_URL}/${id}`, {
+        method: "DELETE"
+    });
+
+    return response.json();
+}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getEmpleados } from "../services/empleadosService";
+import { getEmpleados, eliminarEmpleado } from "../services/empleadosService";
 import { useNavigate } from "react-router-dom";
 
 function EmpleadosPage() {
@@ -84,9 +84,24 @@ function EmpleadosPage() {
         return "▼";
     }
 
+    const handleEliminar = async (id) => {
+
+        const confirmar = window.confirm("¿Seguro que quieres eliminar este empleado?");
+
+        if(!confirmar) return;
+
+        await eliminarEmpleado(id);
+
+        // Actulizar la lista sin recargar la página
+       setEmpleados(
+            empleados.filter(empleado => empleado.id !== id)
+        );
+
+    }
+
 
     return (
-        <div className="container mt-5">
+        <div className="container my-5">
             <h1 className="mb-4">Lista de empleados</h1>
 
             <button className="btn btn-primary mb-3" onClick={() => navigate("/crear")}>Crear empleado</button>
@@ -109,13 +124,17 @@ function EmpleadosPage() {
                             <td>{empleado.puesto}</td>
                             <td>{empleado.salario}</td>
 
-                            {/* Boton para editar el cliente */}
                             <td>
-                                <button className="btn btn-warning btn-sm" 
+                                {/* Boton para editar el cliente */}
+                                <button className="btn btn-warning btn-sm me-2" 
                                 onClick={() => {
                                     navigate(`/editar/${empleado.id}`)
-                                }}
-                                >Editar</button>
+                                }}>Editar</button>
+
+                                {/* Boton para eliminar el cliente */}
+                                <button className="btn btn-danger btn-sm" onClick={() => handleEliminar(empleado.id)}>
+                                    Eliminar
+                                </button>
                             </td>
                         </tr>
                     ))}

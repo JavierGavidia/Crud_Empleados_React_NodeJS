@@ -80,3 +80,21 @@ export const actualizarEmpleado = async (req, res) => {
 
     }
 };
+
+// Eliminar empleado
+export const eliminarEmpleado = async (req, res) => {
+
+    try {
+        const {id} = req.params;
+
+        await db.query(
+            "DELETE FROM empleados WHERE id = ?",
+            [id]
+        );
+
+        res.json({ message: "Empleado eliminado correctamente"});
+
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+};

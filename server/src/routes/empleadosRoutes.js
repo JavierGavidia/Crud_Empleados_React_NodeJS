@@ -1,7 +1,7 @@
 import express from "express";
 
 import {
-    getEmpleados, crearEmpleado, getEmpleadoById, actualizarEmpleado
+    getEmpleados, crearEmpleado, getEmpleadoById, actualizarEmpleado, eliminarEmpleado
 } from "../controllers/empleadosControllers.js";
 
 const router = express.Router();
@@ -17,5 +17,8 @@ router.get("/:id", getEmpleadoById);
 
 // PUT /empleados/:id ----> Actualizar empleado
 router.put("/:id", actualizarEmpleado);
+
+// DELETE /empleados/:id ----> Eliminar empleado
+router.delete("/:id", eliminarEmpleado);
 
 export default router;
