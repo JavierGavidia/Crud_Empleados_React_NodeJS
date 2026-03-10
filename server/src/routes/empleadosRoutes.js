@@ -1,8 +1,8 @@
 import express from "express";
 
 import {
-    getEmpleados, crearEmpleado
-} from "../controllers/empleadosController.js";
+    getEmpleados, crearEmpleado, getEmpleadoById, actualizarEmpleado
+} from "../controllers/empleadosControllers.js";
 
 const router = express.Router();
 
@@ -11,5 +11,11 @@ router.get("/", getEmpleados);
 
 // POST /empleados
 router.post("/", crearEmpleado);
+
+// GET /empleados/:id ----> Obtener empleado por id
+router.get("/:id", getEmpleadoById);
+
+// PUT /empleados/:id ----> Actualizar empleado
+router.put("/:id", actualizarEmpleado);
 
 export default router;

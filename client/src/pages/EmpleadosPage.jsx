@@ -68,6 +68,22 @@ function EmpleadosPage() {
         }
     });
 
+    // Devuelve el icono de orden para cada columna
+    const ponerIconoOrden = (campoColumna) => {
+        //Si esta columna no está siendo ordenada
+        if(configuracionOrden.campo !== campoColumna) {
+            return "⬍"; // icono neutro
+        }
+
+        // Si esta ordenada ascendente
+        if (configuracionOrden.direccion === "asc"){
+            return "▲";
+        }
+
+        // Si está ordenada descendente
+        return "▼";
+    }
+
 
     return (
         <div className="container mt-5">
@@ -78,10 +94,11 @@ function EmpleadosPage() {
             <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th onClick={() => cambiarOrdenColumna("nombre")} style={{cursor:"pointer"}}>Nombre</th>
-                        <th onClick={() => cambiarOrdenColumna("edad")} style={{cursor:"pointer"}}>Edad</th>
-                        <th onClick={() => cambiarOrdenColumna("puesto")} style={{cursor:"pointer"}}>Puesto</th>
-                        <th onClick={() => cambiarOrdenColumna("salario")} style={{cursor:"pointer"}}>Salario</th>
+                        <th onClick={() => cambiarOrdenColumna("nombre")} style={{cursor:"pointer"}}>Nombre {ponerIconoOrden("nombre")}</th>
+                        <th onClick={() => cambiarOrdenColumna("edad")} style={{cursor:"pointer"}}>Edad {ponerIconoOrden("edad")}</th>
+                        <th onClick={() => cambiarOrdenColumna("puesto")} style={{cursor:"pointer"}}>Puesto {ponerIconoOrden("puesto")}</th>
+                        <th onClick={() => cambiarOrdenColumna("salario")} style={{cursor:"pointer"}}>Salario {ponerIconoOrden("salario")}</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -91,6 +108,15 @@ function EmpleadosPage() {
                             <td>{empleado.edad}</td>
                             <td>{empleado.puesto}</td>
                             <td>{empleado.salario}</td>
+
+                            {/* Boton para editar el cliente */}
+                            <td>
+                                <button className="btn btn-warning btn-sm" 
+                                onClick={() => {
+                                    navigate(`/editar/${empleado.id}`)
+                                }}
+                                >Editar</button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
