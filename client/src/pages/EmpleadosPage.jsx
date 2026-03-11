@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { getEmpleados, eliminarEmpleado } from "../services/empleadosService";
+import ModalForm from "../components/ModalForm";
 import { useNavigate } from "react-router-dom";
 
 function EmpleadosPage() {
     // Estado que guarda la lista de empleados obtenida de la API
     const [empleados, setEmpleados] = useState([]);
+
+    // Estado para controlar el modal de eliminar
+    const [empleadoAEliminar, setEmpleadoAEliminar] = useState(null) // guardará qué empleado queremos eliminar
 
     // Estado que guarda la configuración de orden actual
     const [configuracionOrden, setConfiguracionOrden] = useState({
@@ -86,18 +90,14 @@ function EmpleadosPage() {
 
     const handleEliminar = async (id) => {
 
-        const confirmar = window.confirm("¿Seguro que quieres eliminar este empleado?");
-
-        if(!confirmar) return;
-
         await eliminarEmpleado(id);
 
-        // Actulizar la lista sin recargar la página
-       setEmpleados(
-            empleados.filter(empleado => empleado.id !== id)
-        );
+        setEmpleados(prev => prev.filter(empleado => empleado.id !== id));
 
-    }
+        // Una vez eliminado limpiamos el estado
+        setEmpleadoAEliminar(null);
+
+    };
 
 
     return (
@@ -132,7 +132,12 @@ function EmpleadosPage() {
                                 }}>Editar</button>
 
                                 {/* Boton para eliminar el cliente */}
-                                <button className="btn btn-danger btn-sm" onClick={() => handleEliminar(empleado.id)}>
+                                <button 
+                                    className="btn btn-danger btn-sm" 
+                                    onClick={() => setEmpleadoAEliminar(empleado)}
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalEliminar"
+                                >
                                     Eliminar
                                 </button>
                             </td>
@@ -140,6 +145,21 @@ function EmpleadosPage() {
                     ))}
                 </tbody>
             </table>
+
+            {/* MODAL */}
+            <ModalForm 
+                id="modalEliminar"
+                title="Confirmar eliminación de empleado"
+                confirmText="Eliminar"
+                onConfirm={() => empleadoAEliminar && handleEliminar(empleadoAEliminar.id)}> 
+
+                    {empleadoAEliminar && (
+                        <p>
+                            ¿Seguro que quieres eliminar a <strong>{empleadoAEliminar.nombre}</strong>
+                        </p>
+                    )}
+
+            </ModalForm>
         </div>
     );
 }

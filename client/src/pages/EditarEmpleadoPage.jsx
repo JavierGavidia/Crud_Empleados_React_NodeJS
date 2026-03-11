@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import EmpleadoForm from "../components/EmpleadoForm";
 import { getEmpleadoById, actualizarEmpleado } from "../services/empleadosService";
+import ModalForm from "../components/ModalForm";
+import { Modal } from "bootstrap";
 
 function EditarEmpleadoPage() {
 
@@ -35,7 +37,11 @@ function EditarEmpleadoPage() {
 
         await actualizarEmpleado(id, empleadoActualizado);
 
-        navigate("/"); // Volvemos a la lista
+        const modal = new Modal(
+            document.getElementById("modalExito")
+        );
+
+        modal.show();
     };
 
     const handleCancel = () => {
@@ -51,8 +57,20 @@ function EditarEmpleadoPage() {
                 onSubmit={handleSubmit}
                 onCancel={handleCancel}
             />
+
+            {/* MODAL */}
+            <ModalForm
+                id="modalExito"
+                title="Empleado actualizado"
+                confirmText="Volver"
+                onConfirm={ () => navigate("/") }
+            >
+                <p>El empleado <strong>{empleado.nombre}</strong> se ha actualizado con éxito.</p> 
+            </ModalForm>
             
         </div>
+
+        
     );
 }
 
