@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getEmpleados, eliminarEmpleado } from "../services/empleadosService";
 import ModalForm from "../components/ModalForm";
 import { useNavigate } from "react-router-dom";
+import { Modal } from "bootstrap";
 
 function EmpleadosPage() {
     // Estado que guarda la lista de empleados obtenida de la API
@@ -88,6 +89,18 @@ function EmpleadosPage() {
         return "▼";
     }
 
+    // Abrir el modal al pulsar eliminar
+    const abrirModalEliminar = (empleado) => {
+
+        setEmpleadoAEliminar(empleado);
+
+        const modal = new Modal(
+            document.getElementById("modalEliminar")
+        );
+
+        modal.show();
+    };
+
     const handleEliminar = async (id) => {
 
         await eliminarEmpleado(id);
@@ -134,9 +147,7 @@ function EmpleadosPage() {
                                 {/* Boton para eliminar el cliente */}
                                 <button 
                                     className="btn btn-danger btn-sm" 
-                                    onClick={() => setEmpleadoAEliminar(empleado)}
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#modalEliminar"
+                                    onClick={() => abrirModalEliminar(empleado)}
                                 >
                                     Eliminar
                                 </button>
@@ -155,7 +166,7 @@ function EmpleadosPage() {
 
                     {empleadoAEliminar && (
                         <p>
-                            ¿Seguro que quieres eliminar a <strong>{empleadoAEliminar.nombre}</strong>
+                            ¿Seguro que quieres eliminar a <strong>{empleadoAEliminar.nombre}</strong> de la DB?
                         </p>
                     )}
 
