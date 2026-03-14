@@ -1,32 +1,64 @@
-function ModalForm({ id, title, children, onConfirm, confirmText = "Aceptar" }) {
+import { useEffect } from "react";
 
-    return (
-        <div className="modal fade" id={id} tabIndex="-1">
-            <div className="modal-dialog">
-                <div className="modal-content">
-                    {/* Header */}
-                    <div className="modal-header">
-                        <h5 className="modal-title">{title}</h5>
+function ModalForm({ isOpen, onClose, title, children, btnConfirmText, btnCancelText, onConfirm }) {
+  // Bloquear scroll mientras el modal está abierto
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
-                        <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    {/* Body */}
-                    <div className="modal-body">
-                        {children}
-                    </div>
-                    {/* Footer */}
+  if (!isOpen) return null;
 
-                    <div className="modal-footer">
-                        {onConfirm && (
-                            <button className="btn btn-danger" onClick={onConfirm} data-bs-dismiss="modal">{confirmText}</button>
-                        )}
-                        <button className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    </div>
-
-                </div>
-            </div>
+  return (
+    <div className="modal modal-backdrop" style={backdropStyle}>
+      <div className="modal-dialog" style={dialogStyle}>
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title">{title}</h5>
+            <button type="button" className="btn-close" onClick={onClose}></button>
+          </div>
+          <div className="modal-body">{children}</div>
+          <div className="modal-footer">
+            {btnCancelText && (
+              <button className="btn btn-secondary" onClick={onClose}>
+                {btnCancelText}
+              </button>
+            )}
+            {btnConfirmText && onConfirm && (
+              <button className="btn btn-primary" onClick={onConfirm}>
+                {btnConfirmText}
+              </button>
+            )}
+          </div>
         </div>
-    )
+      </div>
+    </div>
+  );
 }
+
+// Estilos inline mínimos
+const backdropStyle = {
+  position: "fixed",
+  top: 0,
+  left: 0,
+  width: "100vw",
+  height: "100vh",
+  backgroundColor: "rgba(0,0,0,0.5)",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  zIndex: 1050,
+};
+
+const dialogStyle = {
+  maxWidth: "500px",
+  width: "100%",
+};
 
 export default ModalForm;
