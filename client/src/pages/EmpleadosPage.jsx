@@ -4,6 +4,10 @@ import { getEmpleados, eliminarEmpleado } from "../services/empleadosService";
 import useModal from "../hooks/useModal";
 import ModalForm from "../components/ModalForm";
 
+// Importamos los iconos del fontwasome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { icons } from "../icons/fontawesome";
+
 function EmpleadosPage() {
   const [empleados, setEmpleados] = useState([]);
   const [configuracionOrden, setConfiguracionOrden] = useState({ campo: null, direccion: "asc" });
@@ -33,19 +37,20 @@ function EmpleadosPage() {
 
   // Devuelve el icono de orden para cada columna
   const ponerIconoOrden = (campoColumna) => {
-    //Si esta columna no está siendo ordenada
+    let icono;
+
+    // Columna no activa
     if (configuracionOrden.campo !== campoColumna) {
-      return "⬍"; // icono neutro
+      icono = icons.listaDesordenada;
+    } else {
+      // Columna activa
+      icono = configuracionOrden.direccion === "asc"
+        ? icons.listaAsc
+        : icons.listaDesc;
     }
 
-    // Si esta ordenada ascendente
-    if (configuracionOrden.direccion === "asc") {
-      return "▲";
-    }
-
-    // Si está ordenada descendente
-    return "▼";
-  }
+    return <FontAwesomeIcon icon={icono} />;
+  };
 
   const abrirModalEliminar = (empleado) => eliminarModal.openModal(empleado);
 
