@@ -31,6 +31,22 @@ function EmpleadosPage() {
     return direccion === "asc" ? valA - valB : valB - valA;
   });
 
+  // Devuelve el icono de orden para cada columna
+  const ponerIconoOrden = (campoColumna) => {
+    //Si esta columna no está siendo ordenada
+    if (configuracionOrden.campo !== campoColumna) {
+      return "⬍"; // icono neutro
+    }
+
+    // Si esta ordenada ascendente
+    if (configuracionOrden.direccion === "asc") {
+      return "▲";
+    }
+
+    // Si está ordenada descendente
+    return "▼";
+  }
+
   const abrirModalEliminar = (empleado) => eliminarModal.openModal(empleado);
 
   const handleEliminar = async () => {
@@ -54,7 +70,11 @@ function EmpleadosPage() {
           <tr>
             {["nombre", "edad", "puesto", "salario"].map((campo) => (
               <th key={campo} style={{ cursor: "pointer" }} onClick={() => cambiarOrdenColumna(campo)}>
-                {campo.charAt(0).toUpperCase() + campo.slice(1)}
+                {campo.charAt(0).toUpperCase() + campo.slice(1)}{" "}
+                {/* Icono dinámico */}
+                <span style={{ marginLeft: "5px" }}>
+                  {ponerIconoOrden(campo)}
+                </span>
               </th>
             ))}
             <th>Acciones</th>
@@ -66,7 +86,7 @@ function EmpleadosPage() {
               <td>{empleado.nombre}</td>
               <td>{empleado.edad}</td>
               <td>{empleado.puesto}</td>
-              <td>{empleado.salario}</td>
+              <td>{empleado.salario}{" €"}</td>
               <td>
                 <button className="btn btn-warning btn-sm me-2" onClick={() => navigate(`/editar/${empleado.id}`)}>Editar</button>
                 <button className="btn btn-danger btn-sm" onClick={() => abrirModalEliminar(empleado)}>Eliminar</button>
